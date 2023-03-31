@@ -3,15 +3,14 @@ import {useDispatch ,useSelector} from 'react-redux'
 import {createHouse, addhouse} from '../../Redux/Actions/Actions'
 
 export default function CreateHouse() {
-
+  const housesCreateID = useSelector((st)=>st.housesCreateID)
   const housesLength = useSelector((st)=>st.housesLength)
   const dispatch = useDispatch()
   let [inputs, setInputs] = React.useState({
-    id: housesLength,
+    id: housesCreateID,
     name: "",
     region: "",
-    words: ""
-    
+    words: "",
   });
 
   function handleChange(event) {

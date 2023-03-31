@@ -6,7 +6,7 @@ import {characters} from '../characters'
 const initialState = {
     houses:[],
     house:{},
-    housesLength: 3,
+    housesCreateID: 4,
     characters: characters,
     onlyHouses: onlyHouses,
     housesWithChar: housesWithChar 
@@ -29,7 +29,7 @@ export default function rootReducer(state=initialState, {type, payload}){
         case GET_HOUSE:
             return{
                 ...state,
-                house: {...state.housesWithChar[Number(payload)]}
+                house: {...state.housesWithChar[Number(payload - 1)]}
             }
         case CREATE_HOUSE:
             return{
@@ -41,12 +41,13 @@ export default function rootReducer(state=initialState, {type, payload}){
         case ADD_HOUSE:
             return{
                 ...state,
-                housesLength: state.housesLength + 1
+                housesCreateID: state.housesCreateID + 1
             }
         case DELETE_HOUSE:
             const newListHouse = state.houses.filter((c)=> c.id !== payload)
             return{
                 ...state,
+                housesLength: state.housesCreateID - 1,
                 houses: newListHouse
             }
         default:

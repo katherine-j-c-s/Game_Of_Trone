@@ -11,14 +11,11 @@ export default function HousesDetail() {
   const house = useSelector((st)=>st.house)
   
   React.useEffect(()=>{
-    console.log(param.houseId);
     dispatch(getHouse(param.houseId))
-
   },[])
   
   return (
     <div>
-      {console.log(house)}
       <h1>{house?.name}</h1>
       <p>This House Its From {house?.region} and our world it's called {house?.words}</p>
       <p>you mind wonder whos living in this kinde of world</p>
