@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {getHouse} from '../../Redux/Actions/Actions' 
@@ -10,7 +10,7 @@ export default function HousesDetail() {
   const param = useParams()
   const house = useSelector((st)=>st.house)
   
-  React.useEffect(()=>{
+  useEffect(()=>{
     dispatch(getHouse(param.houseId))
   },[])
   
