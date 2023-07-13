@@ -13,14 +13,20 @@ class Houses extends Component {
   render() {
     const cargarImagen = require.context("../../img-cp2", true);
     return (
-      <div>
-        <h1>Game of Thrones</h1>
-        <h3>Houses</h3>
-        <img src={cargarImagen(`./main-image-cp2.jpg`)} alt="main-img" />
-        <HousesCard
-          houses={this.props.houses}
-        ></HousesCard>
-      </div>
+      <main>
+        <div className='h-16 w-full relative'>
+          <img className='w-full top-0 h-fit absolute' src={cargarImagen(`./main-image-cp2.jpg`)} alt="main-img" />
+        </div>
+        <div className='relative text-slate-200 w-full'>
+          <h1 className='text-3xl mx-auto w-fit font-bold'>Game of Thrones</h1>
+          <h3 className='mx-auto font-mono border-b-4 px-2 border-orange-600 w-fit'>Houses</h3>
+          <div className='flex w-fit mx-auto mt-20'>
+            <HousesCard
+              houses={this.props.houses}
+            ></HousesCard>
+          </div>
+        </div>
+      </main>
     )
   }
 }
