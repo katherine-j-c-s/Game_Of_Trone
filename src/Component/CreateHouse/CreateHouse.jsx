@@ -35,29 +35,41 @@ export default function CreateHouse() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Name: </label>
-      <input 
-      type="text" 
-      name='name' 
-      value={inputs.name}
-      onChange={handleChange}
-      />
-      <label>Region: </label>
-      <input 
-      type="text" 
-      name='region' 
-      value={inputs.region}
-      onChange={handleChange}
-      />
-      <label>Words: </label>
-      <input 
-      type="text" 
-      name='words' 
-      value={inputs.words}
-      onChange={handleChange}
-      />
-      <button type="submit">Create</button>
-    </form>
+    <div className='bg-orange-950 text-center w-full h-screen pt-20'>
+        <h2 className='font-bold text-yellow-500 w-fit mx-auto border-b-4 pb-2 px-4 border-yellow-500 text-2xl'>ADD A HOUSE</h2>
+        <form className='flex flex-col text-yellow-100 w-96 mx-auto mt-10' onSubmit={handleSubmit}>
+          <div className='flex w-fit mx-auto'>
+            <input 
+            className='bg-transparent hover:border-yellow-200 hover:py-5 transition-all border-b-2 px-5 py-2 border-yellow-500'
+            type="text" 
+            name='name' 
+            placeholder='Name'
+            value={inputs.name}
+            onChange={handleChange}
+            />
+          </div>
+          <div className='flex w-fit mx-auto'>
+            <input 
+            className='bg-transparent hover:border-yellow-200 hover:py-5 transition-all border-b-2 px-5 py-2 border-yellow-500'
+            type="text" 
+            name='region' 
+            placeholder='Region'
+            value={inputs.region}
+            onChange={handleChange}
+            />
+          </div>
+          <div className='flex w-fit mx-auto'>
+            <input 
+            className='bg-transparent hover:border-yellow-200 hover:py-5 transition-all border-b-2 px-5 py-2 border-yellow-500'
+            type="text" 
+            name='words' 
+            placeholder='Words'
+            value={inputs.words}
+            onChange={handleChange}
+            />
+          </div>
+          <button className='mt-10 bg-yellow-500 w-fit mx-auto px-4 rounded-full hover:shadow-xl hover:bg-yellow-300 hover:font-bold text-black transition-all py-2' type="submit">Create</button>
+      </form>
+    </div>
   )
 }
