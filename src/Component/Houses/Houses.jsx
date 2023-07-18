@@ -13,9 +13,9 @@ class Houses extends Component {
   render() {
     const cargarImagen = require.context("../../img-cp2", true);
     return (
-      <main>
-        <div className='h-16 w-full relative'>
-          <img className='w-full top-0 h-fit absolute' src={cargarImagen(`./main-image-cp2.jpg`)} alt="main-img" />
+      <main className='relative'>
+        <div className='h-16 w-sreen relative'>
+          <img className='w-screen top-0 h-fit absolute' src={cargarImagen(`./main-image-cp2.jpg`)} alt="main-img" />
         </div>
         <div className='relative text-slate-200 w-full'>
           <h1 className='text-3xl mx-auto w-fit font-bold'>Game of Thrones</h1>

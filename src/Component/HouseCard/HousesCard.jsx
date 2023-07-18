@@ -7,55 +7,35 @@ import img2 from '../../img-cp2/Casa_Targaryen_estandarte.png'
 import img3 from '../../img-cp2/Casa_Lannister_escudo.png'
 
 class HousesCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false,
-    };
-  }
   handleClik = (id) =>{
       this.props.deleteHouse(id);
   }
   render() {
-    const { show } = this.state;
-    const showOption = () => {
-      if (show === false) {
-        this.setState({ show: true });
-      }else{
-        this.setState({ show: false })
-      }
-    };
     const logos = [img1,img2,img3]
     return (
-      <div className='flex'>
+      <div className='flex w-full justify-evenly'>
         {this.props.houses.length > 0 ? this.props.houses.map((h,i)=>{
           let logo = logos[i]
-          console.log(show);
           return(
+            <Link to={`/houses/${h.id}`}>
             <div 
-              onMouseEnter={showOption} 
-              onMouseLeave={showOption} 
-              className='h-fit relative w-fit hover:-translate-y-2 transition-all mx-2 text-center' 
-              key={h.id}
+              key={h.id} 
+              className='relative cursor-pointer hover:-translate-y-2 transition-all text-center bg-amber-900 z-30 w-fit rounded-xl mx-5 py-5 px-8'
             >
-              <div 
-                className={`${
-                  show === true 
-                  ? "px-20" 
-                  : "px-2" 
-                } 
-                bg-white opacity-[0.5] absolute h-full w-full`}
-              ></div>
-              <div className='relative z-10 w-fit mx-auto'>
-                <button onClick={()=>this.handleClik(h.id)}>delete</button>
-                <img className='h-32 w-32 mx-auto' src={logo} alt="img" />
-                <Link to={`/houses/${h.id}`}>
-                  <h3>{h.name}</h3>
-                </Link>
-                <p>Region: {h.region}</p>
+                <img className='h-32 relative mb-3 z-10 w-32 mx-auto' src={logo} alt="img" />
+                <svg 
+                  className='absolute top-2 left-2'
+                  onClick={()=>this.handleClik(h.id)}
+                  xmlns="http://www.w3.org/2000/svg" 
+                  height="1em" 
+                  viewBox="0 0 448 512">
+                  <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                </svg>
+                <h3 className='font-bold text-orange-950 '>{h.name}</h3>
+                <p className='my-4'>Region: {h.region}</p>
                 <p>Words: {h.words}</p>
-              </div>
             </div>
+            </Link>
           )
           
         }) : null
