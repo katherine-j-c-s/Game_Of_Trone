@@ -35,7 +35,7 @@ export default function CreateHouse() {
   }
 
   return (
-    <div className='bg-orange-950 text-center w-full h-screen pt-20'>
+    <div className='bg-amber-950 text-center w-full h-screen pt-20'>
         <h2 className='font-bold text-yellow-500 w-fit mx-auto border-b-4 pb-2 px-4 border-yellow-500 text-2xl'>ADD A HOUSE</h2>
         <form className='flex flex-col text-yellow-100 w-96 mx-auto mt-10' onSubmit={handleSubmit}>
           <div className='flex w-fit mx-auto'>
