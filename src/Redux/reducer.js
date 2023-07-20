@@ -1,4 +1,4 @@
-import {ADD_HOUSE ,GET_ALL_HOUSES, GET_HOUSE, CREATE_HOUSE, DELETE_HOUSE} from './Actions/Types'
+import {ADD_HOUSE ,GET_ALL_HOUSES, GET_HOUSE, CLEAR_HOUSE, CREATE_HOUSE} from './Actions/Types'
 import {onlyHouses} from '../houses1'
 import {housesWithChar} from '../houses'
 import {characters} from '../characters'
@@ -31,6 +31,11 @@ export default function rootReducer(state=initialState, {type, payload}){
                 ...state,
                 house: {...state.housesWithChar[Number(payload - 1)]}
             }
+        case CLEAR_HOUSE:
+            return{
+                ...state,
+                house: {}
+            }
         case CREATE_HOUSE:
             return{
                 ...state,
@@ -42,13 +47,6 @@ export default function rootReducer(state=initialState, {type, payload}){
             return{
                 ...state,
                 housesCreateID: state.housesCreateID + 1
-            }
-        case DELETE_HOUSE:
-            const newListHouse = state.houses.filter((c)=> c.id !== payload)
-            return{
-                ...state,
-                housesLength: state.housesCreateID - 1,
-                houses: newListHouse
             }
         default:
             return state

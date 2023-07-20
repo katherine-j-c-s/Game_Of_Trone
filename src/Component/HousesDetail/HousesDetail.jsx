@@ -17,9 +17,12 @@ export default function HousesDetail() {
   
   useEffect(()=>{
     dispatch(getHouse(param?.houseId))
-    setShow(house?.characters?.slice(prev,next))
-    setCount(house?.characters?.length)
-  },[])
+    console.log(house);
+    if (Object.keys(house).length > 0) { 
+      setShow(house?.characters?.slice(prev,next))
+      setCount(house?.characters?.length)
+    }
+  },[house?.characters])
 
   useEffect(()=>{
     setShow(house?.characters?.slice(prev,next))
@@ -50,6 +53,7 @@ export default function HousesDetail() {
         <h3 className='font-mono text-black px-10 mt-5'>here are some of people who life here {`----->`}</h3>
       </div>
       <div className='w-2/5 pt-20'>
+        {console.log(house)}
         <CharacterCard characters={show}/>
         <div className={`flex mt-10 w-44 mx-auto  ${prev === 0 | next === count ? ' justify-center' : 'justify-between'}`}>
           {prev === 0 ? null : 

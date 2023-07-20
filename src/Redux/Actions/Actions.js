@@ -1,4 +1,4 @@
-import { ADD_HOUSE ,CREATE_HOUSE, GET_ALL_HOUSES, GET_HOUSE ,DELETE_HOUSE} from "./Types";
+import { ADD_HOUSE ,CREATE_HOUSE, GET_ALL_HOUSES, GET_HOUSE, CLEAR_HOUSE } from "./Types";
 
 export function getAllHouses(withOrWithout){
     return{
@@ -11,6 +11,12 @@ export function getHouse(id){
     return{
         type: GET_HOUSE,
         payload:id
+    }
+}
+
+export function clearHouse(){
+    return{
+        type: CLEAR_HOUSE
     }
 }
 
@@ -30,12 +36,5 @@ export function createHouse(valores){
 export function addhouse(){
     return{
         type: ADD_HOUSE
-    }
-}
-
-export function deleteHouse(id){
-    return{
-        type: DELETE_HOUSE,
-        payload:id
     }
 }
