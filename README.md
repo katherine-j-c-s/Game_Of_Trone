@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# Game of Thrones Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Game of Thrones Explorer](https://game-of-trone.vercel.app/)
 
-## Available Scripts
+Una aplicación web interactiva que te permite explorar el vasto universo de Game of Thrones, incluyendo personajes, casas nobiliarias y libros de la saga "Canción de Hielo y Fuego".
 
-In the project directory, you can run:
+## 📋 Características
 
-### `npm start`
+- **Página de inicio**: Una bienvenida visual al mundo de Game of Thrones con acceso directo a las secciones principales.
+- **Explorador de personajes**: Visualiza y busca entre todos los personajes del universo de Game of Thrones.
+- **Casas de Westeros**: Descubre las diferentes casas nobiliarias, sus lemas, blasones y miembros.
+- **Biblioteca de libros**: Navega por todos los libros de la saga con información detallada de cada uno.
+- **Diseño responsivo**: Experiencia optimizada para dispositivos móviles y de escritorio.
+- **Modo oscuro nativo**: Interfaz elegante con tema oscuro para una mejor experiencia visual.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🔍 Vista previa
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Página de inicio
+![Página de inicio](https://game-of-trone.vercel.app/)
 
-### `npm test`
+### Explorador de personajes
+![Explorador de personajes](https://game-of-trone.vercel.app/characters)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Casas de Westeros
+![Casas de Westeros](https://game-of-trone.vercel.app/houses)
 
-### `npm run build`
+### Biblioteca de libros
+![Biblioteca de libros](https://game-of-trone.vercel.app/books)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Construido con
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [React](https://reactjs.org/) - Biblioteca de JavaScript para construir la interfaz de usuario
+- [React Router](https://reactrouter.com/) - Para la navegación entre páginas
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS para el diseño
+- [An API of Ice And Fire](https://anapioficeandfire.com/) - API para datos de libros y casas
+- [ThronesAPI](https://thronesapi.com/) - API para datos de personajes con imágenes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📂 Estructura del proyecto
 
-### `npm run eject`
+```
+src/
+├── assets/
+│   └── fondoHome.jpg
+├── components/
+│   ├── CategoryCard.jsx       # Tarjetas de categoría en la página de inicio
+│   ├── InfoItem.jsx           # Componente para mostrar información en páginas de detalle
+│   └── NavLink.jsx            # Enlaces de navegación personalizados
+├── pages/
+│   ├── Home.jsx               # Página de inicio
+│   ├── Header.jsx             # Cabecera con navegación
+│   ├── Footer.jsx             # Pie de página
+│   ├── Characters.jsx         # Listado de personajes
+│   ├── CharacterDetail.jsx    # Detalle de personaje
+│   ├── Houses.jsx             # Listado de casas
+│   ├── HouseDetail.jsx        # Detalle de casa
+│   ├── Books.jsx              # Listado de libros
+│   └── BookDetail.jsx         # Detalle de libro
+└── App.js                     # Componente principal y rutas
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📌 Características detalladas
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Explorador de personajes
+- Búsqueda de personajes por nombre o título
+- Vista de cuadrícula con imágenes de perfil
+- Modal de detalles con información completa
+- Navegación directa a detalles del personaje
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Casas de Westeros
+- Filtrado por nombre y región
+- Visualización de lemas, blasones y regiones
+- Detalles completos de cada casa
+- Lista de miembros juramentados
+- Referencias a personajes relacionados (señor actual, heredero, etc.)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Biblioteca de libros
+- Búsqueda por título o autor
+- Información completa de cada libro (fecha de publicación, ISBN, editorial)
+- Listado de personajes y personajes POV
+- Paginación para navegar entre resultados
 
-## Learn More
+## 🚀 Instalación y uso
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/katherine-j-c-s/Game_Of_Trone.git
+   cd game-of-thrones-explorer
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
 
-### Code Splitting
+3. Inicia el servidor de desarrollo:
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
 
-### Analyzing the Bundle Size
+## 🔧 Configuración para producción
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Para compilar la aplicación para producción:
 
-### Making a Progressive Web App
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Los archivos compilados se guardarán en la carpeta `build/`.
 
-### Advanced Configuration
+## 📱 Compatibilidad
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+La aplicación es totalmente responsiva y funciona en:
+- 🖥️ Navegadores de escritorio modernos (Chrome, Firefox, Safari, Edge)
+- 📱 Dispositivos móviles y tablets
+- 🌓 Soporta modo oscuro automático basado en la configuración del sistema
 
-### Deployment
+## 📊 APIs utilizadas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### [An API of Ice And Fire](https://anapioficeandfire.com/)
+- Proporciona datos detallados de libros y casas nobiliarias
+- Endpoints utilizados:
+  - `/api/books` - Listado de libros
+  - `/api/books/{id}` - Detalle de libro
+  - `/api/houses` - Listado de casas
+  - `/api/houses/{id}` - Detalle de casa
 
-### `npm run build` fails to minify
+### [ThronesAPI](https://thronesapi.com/)
+- Proporciona datos e imágenes de personajes
+- Endpoints utilizados:
+  - `/api/v2/Characters` - Listado de personajes
+  - `/api/v2/Characters/{id}` - Detalle de personaje
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+⌨️ con ❤️ por [Katherine Contreras](https://github.com/katherine-j-c-s) 😊
