@@ -72,7 +72,7 @@ export default function Houses() {
     }
   
     return (
-      <div>
+      <div className='mx-10 mt-10'>
         <h1 className="text-3xl font-bold text-yellow-500 mb-6">Casas</h1>
         
         <div className="mb-6">

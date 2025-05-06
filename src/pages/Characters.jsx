@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 export default function Characters() {
 
@@ -8,27 +7,18 @@ const [characters, setCharacters] = useState([])
 const [filteredCharacters, setFilteredCharacters] = useState([])
 const [filter, setFilter] = useState('')
 const [loading, setLoading] = useState(true)
-const [page, setPage] = useState(1)
-const [maxPage, setMaxPage] = useState(1)
+const [selectedCharacter, setSelectedCharacter] = useState(null)
+const [modalOpen, setModalOpen] = useState(false)
 
 useEffect(() => {
-    fetchCharacters(page)
-}, [page])
+    fetchCharacters()
+}, [])
 
-const fetchCharacters = async (pageNum) => {
+const fetchCharacters = async () => {
     setLoading(true)
     try {
-    const response = await fetch(`https://www.anapioficeandfire.com/api/characters?page=${pageNum}&pageSize=10`)
+    const response = await fetch('https://thronesapi.com/api/v2/Characters')
     const data = await response.json()
-    
-    // Extract the last page number from Link header
-    const linkHeader = response.headers.get('Link')
-    if (linkHeader) {
-        const lastPageMatch = linkHeader.match(/page=(\d+).*?rel="last"/)
-        if (lastPageMatch && lastPageMatch[1]) {
-        setMaxPage(parseInt(lastPageMatch[1]))
-        }
-    }
     
     setCharacters(data)
     setFilteredCharacters(data)
@@ -47,33 +37,25 @@ const handleFilterChange = (e) => {
     setFilteredCharacters(characters)
     } else {
     const filtered = characters.filter(character => 
-        (character.name && character.name.toLowerCase().includes(value)) || 
-        (character.aliases && character.aliases[0] && character.aliases[0].toLowerCase().includes(value))
+        (character.fullName && character.fullName.toLowerCase().includes(value)) || 
+        (character.title && character.title.toLowerCase().includes(value))
     )
     setFilteredCharacters(filtered)
     }
 }
 
-const handlePreviousPage = () => {
-    if (page > 1) {
-    setPage(page - 1)
-    }
+const openCharacterModal = (character) => {
+    setSelectedCharacter(character)
+    setModalOpen(true)
 }
 
-const handleNextPage = () => {
-    if (page < maxPage) {
-    setPage(page + 1)
-    }
-}
-
-// Extraer ID del URL
-const getIdFromUrl = (url) => {
-    const parts = url.split('/')
-    return parts[parts.length - 1]
+const closeModal = () => {
+    setModalOpen(false)
+    setTimeout(() => setSelectedCharacter(null), 300)
 }
 
 return (
-    <div>
+    <div className='mx-10 mt-10'>
     <h1 className="text-3xl font-bold text-yellow-500 mb-6">Personajes</h1>
     
     <div className="mb-6">
@@ -97,48 +79,84 @@ return (
         ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCharacters.map(character => {
-                const characterId = getIdFromUrl(character.url)
-                const displayName = character.name || character.aliases[0] || 'Personaje desconocido'
-                
                 return (
-                <div key={characterId} className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:bg-gray-700 transition-colors">
-                    <h2 className="text-xl font-bold text-yellow-500 mb-3">{displayName}</h2>
-                    {character.aliases && character.aliases[0] && character.name && (
-                    <p className="text-gray-300 mb-3">Alias: {character.aliases[0]}</p>
+                <div 
+                    key={character.id} 
+                    className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:bg-gray-700 transition-colors cursor-pointer"
+                    onClick={() => openCharacterModal(character)}
+                >
+                    <div className="flex flex-col items-center mb-4">
+                        <img 
+                            src={character.imageUrl} 
+                            alt={character.fullName} 
+                            className="w-32 h-32 object-cover rounded-full border-2 border-yellow-500"
+                        />
+                    </div>
+                    <h2 className="text-xl font-bold text-yellow-500 mb-3 text-center">{character.fullName}</h2>
+                    {character.title && (
+                        <p className="text-gray-300 mb-3 text-center">Título: {character.title}</p>
                     )}
-                    <p className="text-gray-300 mb-4">
-                    {character.gender && `Género: ${character.gender}`}
+                    <p className="text-gray-300 mb-4 text-center">
+                        {character.family && `Casa: ${character.family}`}
                     </p>
-                    <Link 
-                    to={`/characters/${characterId}`} 
-                    className="text-yellow-500 hover:text-yellow-400 transition-colors"
-                    >
-                    Ver detalles →
-                    </Link>
+                    <div className="text-center">
+                        <span className="text-yellow-500 hover:text-yellow-400 transition-colors">
+                        Ver detalles →
+                        </span>
+                    </div>
                 </div>
                 )
             })}
             </div>
         )}
-        
-        <div className="flex justify-between items-center mt-8">
-            <button
-            onClick={handlePreviousPage}
-            disabled={page === 1}
-            className={`px-4 py-2 rounded-lg ${page === 1 ? 'bg-gray-700 text-gray-500 cursor-not-allowed' : 'bg-gray-700 text-yellow-500 hover:bg-gray-600'}`}
-            >
-            Anterior
-            </button>
-            <span className="text-gray-300">Página {page} de {maxPage}</span>
-            <button
-            onClick={handleNextPage}
-            disabled={page === maxPage}
-            className={`px-4 py-2 rounded-lg ${page === maxPage ? 'bg-gray-700 text-gray-500 cursor-not-allowed' : 'bg-gray-700 text-yellow-500 hover:bg-gray-600'}`}
-            >
-            Siguiente
-            </button>
-        </div>
         </>
+    )}
+
+    {/* Modal para mostrar detalles */}
+    {selectedCharacter && (
+        <div className={`fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300 ${modalOpen ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 max-w-lg w-full max-h-screen overflow-y-auto m-4">
+                <div className="flex justify-end">
+                    <button 
+                        onClick={closeModal}
+                        className="text-gray-400 hover:text-yellow-500 transition-colors"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <div className="flex flex-col items-center mb-6">
+                    <img 
+                        src={selectedCharacter.imageUrl} 
+                        alt={selectedCharacter.fullName} 
+                        className="w-48 h-48 object-cover rounded-full border-4 border-yellow-500 mb-4"
+                    />
+                    <h1 className="text-3xl font-bold text-yellow-500">{selectedCharacter.fullName}</h1>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <div className="mb-4">
+                            <span className="text-gray-400 font-medium">Título:</span> {selectedCharacter.title || 'Desconocido'}
+                        </div>
+                        <div className="mb-4">
+                            <span className="text-gray-400 font-medium">Casa:</span> {selectedCharacter.family || 'Desconocido'}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div className="mb-4">
+                            <span className="text-gray-400 font-medium">Nombre:</span> {selectedCharacter.firstName || 'Desconocido'}
+                        </div>
+                        <div className="mb-4">
+                            <span className="text-gray-400 font-medium">Apellido:</span> {selectedCharacter.lastName || 'Desconocido'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )}
     </div>
 )

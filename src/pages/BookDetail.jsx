@@ -56,7 +56,7 @@ export default function BookDetail() {
     }
   
     return (
-      <div>
+      <div className='mx-10 mt-10'>
         <button 
           onClick={goBack} 
           className="mb-6 flex items-center text-yellow-500 hover:text-yellow-400 transition-colors"
